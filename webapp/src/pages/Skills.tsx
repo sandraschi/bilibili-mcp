@@ -55,7 +55,7 @@ export default function Skills() {
       <h2 className="flex items-center gap-2 text-xl font-bold">
         <Sparkles className="h-5 w-5 text-red-400" /> Skills
       </h2>
-      {loading && <p className="mt-4 text-sm text-zinc-500">Loading skills...</p>}
+      {loading && <p className="mt-4 text-sm text-zinc-400">Loading skills...</p>}
       <div data-testid="skills-list" className="mt-4 space-y-3">
         {skills.map((s) => (
           <div
@@ -79,7 +79,7 @@ export default function Skills() {
           </div>
         ))}
         {!loading && skills.length === 0 && (
-          <p className="text-sm text-zinc-500">No skills reported.</p>
+          <p className="text-sm text-zinc-400">No skills reported.</p>
         )}
       </div>
       {content && (

@@ -3,10 +3,13 @@ import { HelpCircle } from "lucide-react";
 export default function Help() {
   return (
     <div data-testid="help-page" className="mx-auto max-w-3xl space-y-6">
-      <h2 className="flex items-center gap-2 text-xl font-bold">
+      <h2 className="flex items-center gap-2 text-xl font-bold" data-testid="help-title">
         <HelpCircle className="h-5 w-5 text-red-400" /> Help
       </h2>
-      <section className="rounded-lg border border-zinc-800 bg-zinc-900/50 p-5">
+      <section
+        data-testid="help-what"
+        className="rounded-lg border border-zinc-800 bg-zinc-900/50 p-5"
+      >
         <h3 className="text-sm font-semibold text-red-400">What does this server do?</h3>
         <p className="mt-2 text-sm leading-relaxed text-zinc-300">
           bilibili-mcp surfaces the Chinese video platform Bilibili as an MCP tool: trending and
@@ -14,7 +17,10 @@ export default function Help() {
           transcripts that an LLM can summarise or translate.
         </p>
       </section>
-      <section className="rounded-lg border border-zinc-800 bg-zinc-900/50 p-5">
+      <section
+        data-testid="help-pages"
+        className="rounded-lg border border-zinc-800 bg-zinc-900/50 p-5"
+      >
         <h3 className="text-sm font-semibold text-red-400">Pages</h3>
         <ul className="mt-2 list-disc pl-5 text-sm text-zinc-300">
           <li>
@@ -34,7 +40,10 @@ export default function Help() {
           </li>
         </ul>
       </section>
-      <section className="rounded-lg border border-zinc-800 bg-zinc-900/50 p-5">
+      <section
+        data-testid="help-setup"
+        className="rounded-lg border border-zinc-800 bg-zinc-900/50 p-5"
+      >
         <h3 className="text-sm font-semibold text-red-400">Setup</h3>
         <p className="mt-2 text-sm leading-relaxed text-zinc-300">
           Anonymous mode works out of the box. To unlock account tools and pass search risk control,

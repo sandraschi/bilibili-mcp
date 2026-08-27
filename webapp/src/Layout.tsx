@@ -124,11 +124,11 @@ export default function Layout() {
                 backendOk === null ? "bg-zinc-500" : backendOk ? "bg-green-500" : "bg-red-500"
               } animate-pulse`}
             />
-            <span className="text-xs text-zinc-400">
+            <span className="text-sm text-zinc-300">
               {backendOk === null ? "Connecting..." : backendOk ? "Connected" : "Offline"}
             </span>
           </div>
-          <div className="mt-1 text-[10px] uppercase tracking-wide text-zinc-600">
+          <div className="mt-1 text-xs uppercase tracking-wide text-zinc-500">
             tier: <span className="text-red-400">{tier}</span>
           </div>
         </div>
@@ -140,7 +140,7 @@ export default function Layout() {
             <Activity className="h-4 w-4 text-red-400" />
             <h1 className="text-sm font-semibold">{pageTitle}</h1>
           </div>
-          <div className="flex items-center gap-3 text-xs text-zinc-400">
+          <div className="flex items-center gap-3 text-sm text-zinc-300">
             {backend && (
               <>
                 <span>{backend.version}</span>

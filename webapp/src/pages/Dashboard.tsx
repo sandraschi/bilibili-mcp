@@ -142,7 +142,7 @@ export default function Dashboard() {
                   sample
                 </span>
                 <span className="text-sm text-zinc-200">{v.title}</span>
-                <span className="ml-auto text-xs text-zinc-500">{v.author}</span>
+                <span className="ml-auto text-sm text-zinc-400">{v.author}</span>
               </div>
             ))}
           </div>
@@ -154,21 +154,21 @@ export default function Dashboard() {
           <h3 className="flex items-center gap-2 text-sm font-semibold text-red-400">
             <BookOpen className="h-4 w-4" /> Content intelligence
           </h3>
-          <p className="mt-2 text-xs leading-relaxed text-zinc-400">
+          <p className="mt-2 text-sm leading-relaxed text-zinc-300">
             Bilibili subtitles are fetched and returned as plain text, so an LLM can summarise or
             translate a video without watching it.
           </p>
         </div>
         <div className="rounded-lg border border-zinc-800 bg-zinc-900/50 p-4">
           <h3 className="text-sm font-semibold text-red-400">Anonymous first</h3>
-          <p className="mt-2 text-xs leading-relaxed text-zinc-400">
+          <p className="mt-2 text-sm leading-relaxed text-zinc-300">
             Trending, rankings, search, video intel and transcripts all work without an account.
             Responses are TTL-cached to stay polite to Bilibili.
           </p>
         </div>
         <div className="rounded-lg border border-zinc-800 bg-zinc-900/50 p-4">
           <h3 className="text-sm font-semibold text-red-400">Tiers</h3>
-          <p className="mt-2 text-xs leading-relaxed text-zinc-400">
+          <p className="mt-2 text-sm leading-relaxed text-zinc-300">
             Anonymous works now. A logged-in Bilibili cookie unlocks the account tier and passes
             search risk control.
           </p>
@@ -178,7 +178,7 @@ export default function Dashboard() {
       <button
         type="button"
         onClick={() => setRetry((r) => r + 1)}
-        className="mt-4 text-xs text-zinc-500 hover:text-red-400"
+        className="mt-4 text-sm text-zinc-400 hover:text-red-400"
         data-testid="health-retry"
       >
         Retry dashboard
@@ -197,7 +197,7 @@ function Kpi({
   return (
     <div data-testid={testid} className="rounded-lg border border-zinc-800 bg-zinc-900/50 p-4">
       <div
-        className={`flex items-center gap-1.5 text-xs ${accent ? "text-green-400" : "text-zinc-500"}`}
+        className={`flex items-center gap-1.5 text-sm ${accent ? "text-green-400" : "text-zinc-400"}`}
       >
         {icon}
         <span>{label}</span>

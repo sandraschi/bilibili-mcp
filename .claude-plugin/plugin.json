@@ -7,5 +7,6 @@
     "tools": true,
     "prompts": true,
     "resources": true
-  }
+  },
+  "hooks": "../hooks/hooks.json"
 }

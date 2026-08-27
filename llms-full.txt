@@ -68,8 +68,8 @@ subtitles exist or they are login-gated.
 GET /api/health, /api/capabilities, /api/tools, /api/skills, /api/dashboard,
 /api/explore/trending, /api/explore/rank, /api/explore/hot_search,
 /api/search, /api/video/info, /api/video/comments, /api/video/transcript,
-/api/account/status, /api/logs. POST /api/translate, /api/summarize,
-/api/shutdown.
+/api/llm/discover, /api/llm/providers, /api/account/status, /api/logs.
+POST /api/translate, /api/summarize, /api/chat, /api/shutdown.
 
 ## Configuration
 

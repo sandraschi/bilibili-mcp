@@ -4,7 +4,7 @@ All notable changes to this project are documented in this file.
 
 ## [0.1.0] - 2026-08-27
 
-### Added
+### Added (initial scaffold)
 
 - Initial bilibili-mcp scaffold (New Repo Gate, assfix-zero target).
 - **Anonymous content-intelligence tier:** `bilibili_explore` (trending /
@@ -26,3 +26,22 @@ All notable changes to this project are documented in this file.
   `examples.json` (109 entries).
 - Full docs stack (ONBOARDING, CONFIGURATION, TOOLS, DEVELOPMENT,
   TROUBLESHOOTING, WRAPPEE), README, INSTALL, llms.txt pair.
+
+### Added (assfix - fleet-standard conformance)
+
+- `GET /api/llm/discover` + `GET /api/llm/providers` - local LLM auto-detect.
+- `POST /api/chat` - chat completion via local LLM (honest 503 when none).
+- Chat page rewritten to fleet standard: skill-first, 4+ personalities,
+  6 example prompts, localStorage history (100 cap), export/clear, empty state.
+- Settings page LLM provider/model selector dropdowns
+  (`llm-provider-select` / `llm-model-select`).
+- Session-context injection: `.claude-plugin/hooks/hooks.json`, `.cursorrules`
+  `## Session Context`, `.windsurfrules`, `.github/copilot-instructions.md`,
+  `.opencode/skills/`.
+- `.gitattributes` (eol=lf) fixing CRLF Biome failures on Windows CI.
+- Biome pre-commit hook (`scripts/pre-commit-biome.ps1`) + materialised hook.
+- `renovate.json`, `just gates-green`, `biome:ci` script.
+- Font/contrast and data-testid fixes across webapp pages.
+- Playwright webServer now serves backend + frontend; 3 e2e tests green.
+- Fleet registration: ports 11185/11186, starts launcher + README row,
+  fleet manifest + registry + FLEET_INDEX entries.

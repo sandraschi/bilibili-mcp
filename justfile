@@ -55,6 +55,10 @@ ci:
     {{_bunpath}}; cd webapp; bun run tsc --noEmit
     {{_bunpath}}; cd webapp; bunx biome check src/
 
+# Alias: all gates green (same as ci)
+gates-green:
+    just ci
+
 # Bundle for Claude Desktop (MCPB) - stages + injects real 3-4-100 prompts + packs
 mcpb-pack:
     powershell.exe -NoProfile -ExecutionPolicy Bypass -File "scripts\build-mcpb.ps1" -RepoPath "."

@@ -35,7 +35,7 @@ export default function Tools() {
         </span>
       </div>
       {error && <p className="mt-2 text-sm text-red-400">{error}</p>}
-      {loading && <p className="mt-4 text-sm text-zinc-500">Loading tools...</p>}
+      {loading && <p className="mt-4 text-sm text-zinc-400">Loading tools...</p>}
       <div data-testid="tools-list" className="mt-4 grid gap-2 md:grid-cols-2">
         {tools.map((t) => (
           <div
@@ -47,7 +47,7 @@ export default function Tools() {
           </div>
         ))}
         {!loading && tools.length === 0 && (
-          <p className="text-sm text-zinc-500">No tools reported.</p>
+          <p className="text-sm text-zinc-400">No tools reported.</p>
         )}
       </div>
     </div>

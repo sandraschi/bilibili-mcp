@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "tsc": "tsc --noEmit",
     "check": "biome check src/",
+    "biome:ci": "biome check src/",
     "test": "playwright test"
   },
   "dependencies": {

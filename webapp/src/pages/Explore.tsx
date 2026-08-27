@@ -72,7 +72,7 @@ export default function Explore() {
       </div>
 
       {error && <p className="mt-2 text-sm text-red-400">{error}</p>}
-      {loading && <p className="mt-4 text-sm text-zinc-500">Fetching live Bilibili data...</p>}
+      {loading && <p className="mt-4 text-sm text-zinc-400">Fetching live Bilibili data...</p>}
 
       <section data-testid="trending-section" className="mt-6">
         <h3 className="flex items-center gap-2 text-sm font-semibold text-red-400">
@@ -84,7 +84,7 @@ export default function Explore() {
           ))}
         </div>
         {!loading && trending.length === 0 && (
-          <p className="text-sm text-zinc-500">No trending videos returned.</p>
+          <p className="text-sm text-zinc-400">No trending videos returned.</p>
         )}
       </section>
 
@@ -98,7 +98,7 @@ export default function Explore() {
           ))}
         </div>
         {!loading && rank.length === 0 && (
-          <p className="text-sm text-zinc-500">No ranking entries returned.</p>
+          <p className="text-sm text-zinc-400">No ranking entries returned.</p>
         )}
       </section>
 
@@ -113,12 +113,12 @@ export default function Explore() {
             >
               <span className="mr-1.5 text-red-400">#{i + 1}</span>
               {h.keyword}
-              <span className="ml-1.5 text-xs text-zinc-500">{String(h.heat)}</span>
+              <span className="ml-1.5 text-xs text-zinc-400">{String(h.heat)}</span>
             </span>
           ))}
         </div>
         {!loading && hot.length === 0 && (
-          <p className="text-sm text-zinc-500">No hot keywords returned.</p>
+          <p className="text-sm text-zinc-400">No hot keywords returned.</p>
         )}
       </section>
     </div>
@@ -143,7 +143,7 @@ function VideoCard({ v }: { v: SlimVideo }) {
           <Play className="h-3 w-3 text-red-500" /> {fmt(v.play)}
         </span>
         <span>{v.author}</span>
-        <span className="ml-auto rounded bg-zinc-800 px-1.5 py-0.5 text-[10px] text-zinc-500">
+        <span className="ml-auto rounded bg-zinc-800 px-1.5 py-0.5 text-[10px] text-zinc-400">
           {v.bvid}
         </span>
       </div>

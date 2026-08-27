@@ -38,3 +38,18 @@ def test_logs():
     r = client.get("/api/logs")
     assert r.status_code == 200
     assert "logs" in r.json()
+
+
+def test_llm_discover():
+    r = client.get("/api/llm/discover")
+    assert r.status_code == 200
+    body = r.json()
+    assert "providers" in body
+    assert any(p["name"] == "ollama" for p in body["providers"])
+
+
+def test_chat_503_without_llm():
+    # No LLM configured in tests -> honest not_configured 503, not a fake reply.
+    r = client.post("/api/chat", json={"messages": [{"role": "user", "content": "hi"}]})
+    assert r.status_code == 503
+    assert r.json()["error_type"] == "not_configured"

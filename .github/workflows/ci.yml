@@ -47,4 +47,4 @@ jobs:
 
       - name: Biome check
         working-directory: webapp
-        run: bunx biome check src/
+        run: bun run biome:ci

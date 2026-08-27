@@ -85,6 +85,74 @@ def provider_health(force: bool = False) -> dict[str, Any]:
         return {"available": False, "model": settings.llm_model, "base_url": settings.llm_base_url}
 
 
+# Standard local LLM endpoints probed by the webapp's Settings / Chat pages.
+_DISCOVER_TARGETS: list[dict[str, Any]] = [
+    {"name": "ollama", "base": "http://127.0.0.1:11434/v1", "port": 11434},
+    {"name": "lmstudio", "base": "http://127.0.0.1:1234/v1", "port": 1234},
+    {"name": "vllm", "base": "http://127.0.0.1:8000/v1", "port": 8000},
+]
+
+
+def discover_providers() -> dict[str, Any]:
+    """Auto-detect local LLM providers (Ollama / LM Studio / vLLM).
+
+    Returns a list of {name, base, port, status} where status is one of
+    detected / not_found. Used by GET /api/llm/discover for the webapp's
+    provider/model selectors.
+    """
+    results = []
+    for target in _DISCOVER_TARGETS:
+        base: str = target["base"]
+        try:
+            resp = httpx.get(f"{base}/models", timeout=3.0)
+            ok = resp.status_code == 200
+        except Exception:
+            ok = False
+        results.append(
+            {
+                "name": target["name"],
+                "base": base,
+                "port": target["port"],
+                "status": "detected" if ok else "not_found",
+            }
+        )
+    detected = [r for r in results if r["status"] == "detected"]
+    return {"providers": results, "detected": [r["name"] for r in detected]}
+
+
+def chat_completion(messages: list[dict[str, str]], model: str = "") -> dict[str, Any]:
+    """Chat completion against the configured local LLM.
+
+    Returns {success, reply, model}. Raises RuntimeError if no LLM is
+    reachable so the REST layer can surface an honest error.
+    """
+    model = model or settings.llm_model
+    if not settings.llm_configured:
+        raise RuntimeError(
+            "No LLM configured - set BILIBILI_LLM_BASE_URL and BILIBILI_LLM_MODEL "
+            "(e.g. Ollama at http://127.0.0.1:11434/v1)."
+        )
+    try:
+        resp = httpx.post(
+            f"{settings.llm_base_url}/chat/completions",
+            json={
+                "model": model,
+                "messages": messages,
+                "temperature": 0.5,
+                "max_tokens": 1200,
+            },
+            timeout=90.0,
+        )
+        resp.raise_for_status()
+        data = resp.json()
+        reply = data["choices"][0]["message"]["content"].strip()
+        return {"success": True, "reply": reply, "model": model}
+    except httpx.HTTPError as exc:
+        raise RuntimeError(f"Local LLM unreachable: {exc}") from exc
+    except (KeyError, IndexError, ValueError) as exc:
+        raise RuntimeError(f"Unexpected response from local LLM: {exc}") from exc
+
+
 def translate(text: str, target: str = "en") -> dict[str, Any]:
     """Translate Chinese to English via local LLM, falling back to a glossary."""
     if target != "en":

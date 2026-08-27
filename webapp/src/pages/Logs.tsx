@@ -48,16 +48,16 @@ export default function Logs() {
         data-testid="logs-list"
       >
         {logs.length === 0 && (
-          <p className="text-zinc-600" data-testid="logs-empty">
+          <p className="text-zinc-500" data-testid="logs-empty">
             No log entries.
           </p>
         )}
         {logs.map((l, i) => (
           // biome-ignore lint/suspicious/noArrayIndexKey: log rows have no stable unique id
           <div key={i} data-testid="log-entry" className="flex gap-2 py-0.5">
-            <span className="shrink-0 text-zinc-600">{l.ts}</span>
+            <span className="shrink-0 text-zinc-500">{l.ts}</span>
             <span className={`w-16 shrink-0 ${color(l.level)}`}>{l.level}</span>
-            <span className="shrink-0 text-zinc-600">{l.source}</span>
+            <span className="shrink-0 text-zinc-500">{l.source}</span>
             <span className="break-all text-zinc-300">{l.message}</span>
           </div>
         ))}

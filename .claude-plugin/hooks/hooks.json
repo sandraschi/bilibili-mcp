@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "text",
+            "text": "## Session Context (Bilibili MCP)\n\nYou can search, rank and summarise the Chinese video platform Bilibili via 10 tools. Anonymous tier works without an account; account tier needs a +86 login cookie.\n\n**Before starting work:**\n1. See what is trending: bilibili_explore(operation=\"trending\", limit=10)\n2. Pull a video's transcript for summarising: bilibili_transcript(bvid=\"BV...\")\n\n**At end of work, keep it clean:**\n- Reuse cached results; never re-fetch the same video twice in a session\n- If a transcript is unavailable or login-gated, say so - never fabricate it"
+          }
+        ]
+      }
+    ]
+  }
+}

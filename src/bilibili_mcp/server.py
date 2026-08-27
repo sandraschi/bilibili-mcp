@@ -300,6 +300,38 @@ def build_app() -> FastAPI:
             "transcript_word_count": transcript["data"]["word_count"],
         }
 
+    @app.get("/api/llm/discover")
+    def llm_discover() -> dict:
+        from .llm import discover_providers
+
+        return discover_providers()
+
+    @app.get("/api/llm/providers")
+    def llm_providers() -> dict:
+        from .llm import discover_providers
+
+        return discover_providers()
+
+    @app.post("/api/chat", response_model=None)
+    def chat_route(req: ChatRequest = Body(...)) -> dict | JSONResponse:  # noqa: B008
+        from .llm import chat_completion
+
+        try:
+            result = chat_completion(req.messages, req.model)
+            return {"success": True, "reply": result["reply"], "model": result["model"]}
+        except RuntimeError as exc:
+            return JSONResponse(
+                {
+                    "success": False,
+                    "error": str(exc),
+                    "error_type": "not_configured",
+                    "suggestions": [
+                        "Start a local LLM (e.g. `ollama serve`) or set BILIBILI_LLM_BASE_URL / BILIBILI_LLM_MODEL.",
+                    ],
+                },
+                status_code=503,
+            )
+
     @app.get("/api/account/status")
     def account_status() -> dict:
         from .tools.account import bilibili_account

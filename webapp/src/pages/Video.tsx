@@ -79,7 +79,7 @@ export default function Video() {
       </div>
 
       {error && <p className="mt-3 text-sm text-red-400">{error}</p>}
-      {loading && <p className="mt-3 text-sm text-zinc-500">Fetching video data...</p>}
+      {loading && <p className="mt-3 text-sm text-zinc-400">Fetching video data...</p>}
 
       {info && (
         <section
@@ -129,7 +129,7 @@ export default function Video() {
             {transcript}
           </div>
         ) : (
-          <p className="mt-2 text-sm text-zinc-500">
+          <p className="mt-2 text-sm text-zinc-400">
             {loading
               ? "Loading transcript..."
               : "No transcript loaded. Some videos gate subtitles behind login."}
@@ -148,7 +148,7 @@ export default function Video() {
               data-testid="comment"
               className="rounded-lg border border-zinc-800 bg-zinc-900/50 p-3"
             >
-              <div className="flex items-center gap-2 text-xs text-zinc-500">
+              <div className="flex items-center gap-2 text-xs text-zinc-400">
                 <span className="font-semibold text-zinc-300">{c.author}</span>
                 <span className="ml-auto">{fmtTime(c.time)}</span>
                 <span>❤ {fmt(c.likes)}</span>
@@ -157,7 +157,7 @@ export default function Video() {
             </div>
           ))}
           {!loading && comments.length === 0 && (
-            <p className="text-sm text-zinc-500">No comments loaded.</p>
+            <p className="text-sm text-zinc-400">No comments loaded.</p>
           )}
         </div>
       </section>

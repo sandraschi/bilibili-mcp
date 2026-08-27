@@ -73,6 +73,9 @@ subtitles exist or they are login-gated.
 | GET | `/api/video/transcript?bvid=` | transcript text |
 | POST | `/api/translate` | zh->en via local LLM (glossary fallback) |
 | POST | `/api/summarize` | summarise a transcript via local LLM |
+| GET | `/api/llm/discover` | auto-detect local LLM providers (Ollama/LM Studio/vLLM) |
+| GET | `/api/llm/providers` | same as /api/llm/discover |
+| POST | `/api/chat` | chat completion via local LLM |
 | GET | `/api/account/status` | account tier status |
 | GET | `/api/logs` | ring-buffer log tail |
 | POST | `/api/shutdown` | graceful self-termination |

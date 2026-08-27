@@ -92,9 +92,9 @@ export default function Search() {
         </span>
       </div>
 
-      {message && <p className="mt-3 text-xs text-zinc-500">{message}</p>}
+      {message && <p className="mt-3 text-xs text-zinc-400">{message}</p>}
       {error && <p className="mt-3 text-sm text-red-400">{error}</p>}
-      {loading && <p className="mt-3 text-sm text-zinc-500">Searching Bilibili...</p>}
+      {loading && <p className="mt-3 text-sm text-zinc-400">Searching Bilibili...</p>}
 
       <div data-testid="search-results" className="mt-4 space-y-2">
         {videos.map((v) => (
@@ -108,7 +108,7 @@ export default function Search() {
           >
             <div className="flex items-center gap-2 text-sm">
               <span className="font-semibold text-red-400">{v.title || "(untitled)"}</span>
-              <span className="ml-auto flex items-center gap-1 text-xs text-zinc-500">
+              <span className="ml-auto flex items-center gap-1 text-xs text-zinc-400">
                 <Play className="h-3 w-3" /> {fmt(v.play)}
               </span>
             </div>
@@ -129,7 +129,7 @@ export default function Search() {
             <div className="flex items-center gap-2 text-sm">
               <UserRound className="h-4 w-4 text-red-400" />
               <span className="font-semibold text-red-400">{u.name}</span>
-              <span className="ml-auto flex items-center gap-3 text-xs text-zinc-500">
+              <span className="ml-auto flex items-center gap-3 text-xs text-zinc-400">
                 <span>{fmt(u.fans)} fans</span>
                 <span>{u.videos} videos</span>
               </span>
@@ -138,7 +138,7 @@ export default function Search() {
           </a>
         ))}
         {!loading && !error && videos.length === 0 && users.length === 0 && (
-          <p className="text-sm text-zinc-500">No results yet - search above.</p>
+          <p className="text-sm text-zinc-400">No results yet - search above.</p>
         )}
       </div>
     </div>
