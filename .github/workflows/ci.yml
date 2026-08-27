@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  ci:
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v3
+        with:
+          version: latest
+          enable-cache: true
+
+      - name: Install Python deps
+        run: uv sync
+
+      - name: Ruff lint
+        run: uv run ruff check src/
+
+      - name: Ruff format check
+        run: uv run ruff format src/ --check
+
+      - name: Pyright typecheck
+        run: uv run pyright src/
+
+      - name: Pytest
+        run: uv run pytest -q
+
+      - name: Install Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          version: latest
+
+      - name: Webapp install
+        working-directory: webapp
+        run: bun install --frozen-lockfile
+
+      - name: TypeScript check
+        working-directory: webapp
+        run: bun run tsc
+
+      - name: Biome check
+        working-directory: webapp
+        run: bunx biome check src/

@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "bilibili-mcp": {
+      "command": "python",
+      "args": ["-m", "bilibili_mcp.server"],
+      "env": { "PYTHONPATH": "${workspaceFolder}/src" },
+      "capabilities": {
+        "tools": { "enabled": true },
+        "prompts": { "enabled": true },
+        "resources": { "enabled": true }
+      },
+      "metadata": {
+        "version": "0.1.0",
+        "tags": ["video", "china", "media", "transcript", "discovery"],
+        "homepage": "https://github.com/sandraschi/bilibili-mcp"
+      }
+    }
+  }
+}

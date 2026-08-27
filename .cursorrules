@@ -1,0 +1,33 @@
+# Cursor rules for bilibili-mcp
+
+## Context
+
+MCP server bridging Bilibili (B站). Backend FastMCP 3.4.4 + FastAPI (port
+11185), React webapp (11186). Anonymous tier works without an account; the
+account tier needs a +86 login cookie.
+
+## Always
+
+- Use `uv run python`, never naked `python`.
+- PowerShell 7 for Windows commands; ASCII hyphens only (no em/en dashes).
+- Backend tools are portmanteaus with `operation: Literal[...]` and
+  `Annotated` + `Field` docs (no `Args:` section).
+- Tool returns: `{success, message, error, error_type, suggestions}`.
+- Anonymous-first: never require an account for core content intelligence.
+- Never fabricate stats, views, or transcripts from the API.
+
+## Run / test
+
+```powershell
+uv sync
+just serve     # full stack
+just ci        # ruff + pyright + pytest + tsc + biome
+just test      # pytest
+```
+
+## Don'ts
+
+- Don't commit `.env`, `node_modules/`, `.venv`, `target/`, `*.mcpb`,
+  `data/`, `*.bak*`.
+- Don't hammer Bilibili in a loop; respect rate limits and the TTL cache.
+- Don't modify `_upstream/` or third-party vendored code.

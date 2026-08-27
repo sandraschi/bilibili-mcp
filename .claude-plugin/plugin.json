@@ -1,0 +1,11 @@
+{
+  "name": "bilibili-mcp",
+  "description": "Content-intelligence bridge for Bilibili (B站) - search, trending, video intel and transcript summarisation.",
+  "version": "0.1.0",
+  "author": "sandraschi",
+  "capabilities": {
+    "tools": true,
+    "prompts": true,
+    "resources": true
+  }
+}

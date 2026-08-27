@@ -1,0 +1,113 @@
+# bilibili-mcp - Full Documentation
+
+Content-intelligence bridge for Bilibili (B站), China's largest video
+platform. Search, trending, video intel and transcript summarisation. No
+account needed for the core tier.
+
+## Overview
+
+bilibili-mcp lets an agent search, rank, inspect and summarise Bilibili
+videos. The killer feature is reading a video's auto-subtitle track as plain
+text so an LLM can summarise or translate it. It does NOT play video, and
+does NOT automate uploading or commenting.
+
+## Execution
+
+- Mode: API bridge (no host app, no GUI). Talks to Bilibili public web APIs
+  over HTTPS.
+- Tiers: Anonymous (no account) powers explore/search/video/transcript.
+  Account tier (a +86 login cookie `BILIBILI_COOKIE`) unlocks following and
+  favorites.
+- Backend 11185 (FastAPI + FastMCP `/mcp` + REST `/api`), frontend 11186
+  (Vite React).
+
+## MCP Tools
+
+All tools return a structured dict `{success, message, ...}`; failures add
+`error`, `error_type`, `suggestions`.
+
+### bilibili_explore(operation, limit, rid)
+- `trending` - popular feed (anonymous). Returns `data[]` of slim videos.
+- `rank` - all-region ranking; rid 0=all 1=anime 3=music 4=game
+  5=entertainment 36=knowledge 160=fashion.
+- `hot_search` - trending search keywords: `data[]` of `{keyword, heat}`.
+
+### bilibili_search(operation, keyword, limit)
+- `video` - search video titles.
+- `user` - search creators.
+May be risk-controlled anonymously (-412); returns an actionable error.
+
+### bilibili_video(operation, bvid, aid, limit)
+- `info` - full metadata + stats block.
+- `comments` - hot top comments.
+- `pages` - multi-part list (first part cid feeds transcript).
+
+### bilibili_transcript(bvid, part_index)
+Fetches a video's auto-subtitle track as plain text. Returns
+`{success, data:{bvid, cid, lang, text, word_count}}`. Honest error when no
+subtitles exist or they are login-gated.
+
+### bilibili_account(operation, mid)
+- `status` - reports tier (anonymous/account), always works.
+- `following`, `favorites` - require a +86 login; return an honest
+  `requires_login` state when logged out.
+
+### Support
+- `bilibili_help(topic)` - self-description + tool list.
+- `bilibili_shutdown(confirm)` - graceful shutdown.
+- `show_bilibili_trending_card(limit)`, `show_bilibili_status_card()`,
+  `show_bilibili_cache_card()` - Prefab in-chat cards.
+
+## Prompts
+
+- `bilibili_research` - discover trending + summarise a transcript.
+- `bilibili_briefing` - produce a short trend briefing.
+
+## REST Endpoints
+
+GET /api/health, /api/capabilities, /api/tools, /api/skills, /api/dashboard,
+/api/explore/trending, /api/explore/rank, /api/explore/hot_search,
+/api/search, /api/video/info, /api/video/comments, /api/video/transcript,
+/api/account/status, /api/logs. POST /api/translate, /api/summarize,
+/api/shutdown.
+
+## Configuration
+
+| Variable | Default | Purpose |
+|----------|---------|---------|
+| BILIBILI_COOKIE | (empty) | Optional +86 login cookie; unlocks account tier |
+| BILIBILI_API_BASE | https://api.bilibili.com | Bilibili API root |
+| BILIBILI_LLM_BASE_URL | http://127.0.0.1:11434/v1 | Local LLM (Ollama) |
+| BILIBILI_LLM_MODEL | qwen2.5:7b | Local LLM model |
+| BILIBILI_CACHE_TTL | 600 | JSON cache TTL (s) |
+| BILIBILI_BACKEND_PORT | 11185 | Backend port |
+| BILIBILI_FRONTEND_PORT | 11186 | Frontend port |
+
+## Install
+
+Requirements: uv (Python 3.11+), Node + Bun (webapp).
+```powershell
+uv sync
+.\start.ps1   # full stack, opens webapp at 127.0.0.1:11186
+```
+
+## Rate-limit etiquette
+
+Bilibili aggressively rate-limits scrapers. Default page sizes are small and
+responses are TTL-cached (default 10 min). -412 means risk control: slow
+down, reuse cache, or set a cookie. Never hammer an endpoint in a loop.
+
+## Honesty rules
+
+- Never invent views/stats - report exactly what the API returned.
+- If subtitles are unavailable or login-gated, say so - do not fabricate a
+  transcript.
+- Account-tier data (following, favorites) requires real auth; no mock data.
+
+## Troubleshooting
+
+- -412 / "risk control blocked": slow down or set a cookie.
+- -101 "not logged in": endpoint needs a login cookie.
+- "No subtitle tracks available": creator disabled captions, or login-gated.
+- summarize returns not-configured: start Ollama or set the LLM env vars.
+- Webapp shows MOCK content: expected until a cookie is set (mock-until-onboarded).

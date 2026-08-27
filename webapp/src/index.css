@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-zinc-950 text-zinc-100 antialiased;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+select,
+input,
+textarea {
+  color-scheme: dark;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-zinc-700 rounded;
+}
+
+.prose-dark h1 {
+  @apply text-2xl font-bold mb-3;
+}
+.prose-dark h2 {
+  @apply text-xl font-bold mt-6 mb-2;
+}
+.prose-dark h3 {
+  @apply text-lg font-semibold mt-4 mb-2;
+}
+.prose-dark p {
+  @apply my-2 leading-relaxed;
+}
+.prose-dark ul {
+  @apply list-disc pl-5 my-2;
+}
+.prose-dark ol {
+  @apply list-decimal pl-5 my-2;
+}
+.prose-dark code {
+  @apply bg-zinc-800 px-1.5 py-0.5 rounded text-red-400 text-sm;
+}
+.prose-dark pre {
+  @apply bg-zinc-900 border border-zinc-800 rounded p-3 my-3 overflow-x-auto;
+}
+.prose-dark pre code {
+  @apply bg-transparent text-zinc-200 p-0;
+}
+.prose-dark a {
+  @apply text-red-400 hover:underline;
+}
+.prose-dark blockquote {
+  @apply border-l-4 border-red-500 pl-3 text-zinc-400 italic;
+}
+.prose-dark table {
+  @apply border border-zinc-700 my-3 text-sm;
+}
+.prose-dark th,
+.prose-dark td {
+  @apply border border-zinc-700 px-2 py-1;
+}

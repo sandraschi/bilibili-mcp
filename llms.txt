@@ -1,0 +1,25 @@
+# bilibili-mcp
+
+Content-intelligence bridge for Bilibili (B站), China's largest video
+platform. Search, trending, video intel and transcript summarisation. No
+account needed for the core tier.
+
+## Execution
+
+- Default: API bridge (no host app, no GUI). Talks to Bilibili public web
+  APIs over HTTPS.
+- Anonymous tier works out of the box. Account tier (following, favorites)
+  needs a +86 login cookie (`BILIBILI_COOKIE`).
+
+## Artifacts
+
+- In: search keyword, Bilibili URL (BV.../av...)
+- Out: video metadata + stats, transcript text, comment summaries
+
+## Links
+
+- README: https://github.com/sandraschi/bilibili-mcp
+- Onboarding: docs/ONBOARDING.md
+- Tools: docs/TOOLS.md
+- Configuration: docs/CONFIGURATION.md
+- Troubleshooting: docs/TROUBLESHOOTING.md
