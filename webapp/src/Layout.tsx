@@ -59,7 +59,24 @@ export default function Layout() {
   useEffect(() => {
     void refresh();
     const interval = setInterval(refresh, 15000);
-    return () => clearInterval(interval);
+
+    // Tauri desktop shell emits "backend-status" when the embedded backend
+    // process changes state; fall back to HTTP polling above when not
+    // running inside Tauri (e.g. plain browser dev mode).
+    let unlisten: (() => void) | undefined;
+    void (async () => {
+      try {
+        const { listen } = await import("@tauri-apps/api/event");
+        unlisten = await listen("backend-status", () => void refresh());
+      } catch {
+        // Not running inside the Tauri webview - HTTP polling covers it.
+      }
+    })();
+
+    return () => {
+      clearInterval(interval);
+      unlisten?.();
+    };
   }, [refresh]);
 
   const pageTitle =

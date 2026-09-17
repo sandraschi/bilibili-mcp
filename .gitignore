@@ -45,6 +45,11 @@ reports/
 .coverage
 coverage.xml
 htmlcov/
+cua-reports/
+
+# Native/Tauri build binaries (built by nsis-build, never committed)
+native/resources/*.exe
+src-tauri/resources/*.exe
 
 # Secrets
 .env

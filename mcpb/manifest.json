@@ -1,0 +1,59 @@
+{
+  "manifest_version": "0.2",
+  "name": "bilibili-mcp",
+  "version": "0.1.0",
+  "description": "Bilibili (Chinese video platform) bridge - search, trending, video intel and transcript summarization",
+  "author": { "name": "sandraschi" },
+  "server": {
+    "type": "python",
+    "entry_point": "run_server.py",
+    "mcp_config": {
+      "command": "uv",
+      "args": ["run","--directory","${PWD}","run_server.py"],
+      "env": {
+        "PYTHONPATH": "${PWD}/src",
+        "PYTHONUNBUFFERED": "1"
+      }
+    }
+  },
+  "tools": [
+    { "name": "health", "description": "health" },
+    { "name": "capabilities", "description": "capabilities" },
+    { "name": "tools_list", "description": "tools_list" },
+    { "name": "skills_list", "description": "skills_list" },
+    { "name": "skill_content", "description": "skill_content" },
+    { "name": "dashboard", "description": "dashboard" },
+    { "name": "explore_trending", "description": "explore_trending" },
+    { "name": "explore_rank", "description": "explore_rank" },
+    { "name": "explore_hot_search", "description": "explore_hot_search" },
+    { "name": "search_surface", "description": "search_surface" },
+    { "name": "video_info", "description": "video_info" },
+    { "name": "video_comments", "description": "video_comments" },
+    { "name": "video_transcript", "description": "video_transcript" },
+    { "name": "llm_discover", "description": "llm_discover" },
+    { "name": "llm_providers", "description": "llm_providers" },
+    { "name": "account_status", "description": "account_status" },
+    { "name": "logs", "description": "logs" },
+    { "name": "bilibili_account", "description": "bilibili_account" },
+    { "name": "bilibili_account_status", "description": "bilibili_account(status)" },
+    { "name": "bilibili_account_following", "description": "bilibili_account(following)" },
+    { "name": "bilibili_account_favorites", "description": "bilibili_account(favorites)" },
+    { "name": "bilibili_explore", "description": "bilibili_explore" },
+    { "name": "bilibili_explore_trending", "description": "bilibili_explore(trending)" },
+    { "name": "bilibili_explore_rank", "description": "bilibili_explore(rank)" },
+    { "name": "bilibili_explore_hot_search", "description": "bilibili_explore(hot_search)" },
+    { "name": "bilibili_help", "description": "bilibili_help" },
+    { "name": "show_bilibili_trending_card", "description": "show_bilibili_trending_card" },
+    { "name": "show_bilibili_status_card", "description": "show_bilibili_status_card" },
+    { "name": "show_bilibili_cache_card", "description": "show_bilibili_cache_card" },
+    { "name": "bilibili_search", "description": "bilibili_search" },
+    { "name": "bilibili_search_video", "description": "bilibili_search(video)" },
+    { "name": "bilibili_search_user", "description": "bilibili_search(user)" },
+    { "name": "bilibili_shutdown", "description": "bilibili_shutdown" },
+    { "name": "bilibili_transcript", "description": "bilibili_transcript" },
+    { "name": "bilibili_video", "description": "bilibili_video" },
+    { "name": "bilibili_video_info", "description": "bilibili_video(info)" },
+    { "name": "bilibili_video_comments", "description": "bilibili_video(comments)" },
+    { "name": "bilibili_video_pages", "description": "bilibili_video(pages)" }
+  ]
+}

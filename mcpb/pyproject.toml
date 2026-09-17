@@ -23,9 +23,6 @@ dev = [
     "respx>=0.21",
     "ruff>=0.5",
     "pyright>=1.1.370",
-    "pywinauto>=0.6.9",
-    "pillow>=12.3.0",
-    "pytesseract>=0.3.13",
 ]
 
 [build-system]

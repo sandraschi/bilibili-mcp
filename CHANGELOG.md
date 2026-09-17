@@ -2,6 +2,15 @@
 
 All notable changes to this project are documented in this file.
 
+## [Unreleased] - 2026-09-17
+
+### Fixed (assfix — Tauri drift)
+
+- Added `@tauri-apps/api` dependency to `webapp/package.json` (was missing despite
+  `src-tauri/` existing).
+- Added Tauri `backend-status` `listen()` event subscription in `Layout.tsx`, with
+  HTTP polling kept as the non-Tauri fallback.
+
 ## [0.1.0] - 2026-08-27
 
 ### Added (initial scaffold)
