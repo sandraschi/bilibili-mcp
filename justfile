@@ -70,3 +70,11 @@ build:
 # Quick stdio smoke test of the MCP server
 smoke:
     uv run python -c "import asyncio; from bilibili_mcp.server_state import mcp; import bilibili_mcp.tools; print('tools:', len(asyncio.run(mcp.list_tools())))"
+
+# Build the Tauri NSIS installer (frontend + PyInstaller backend + bundle)
+build-native:
+    powershell.exe -NoProfile -ExecutionPolicy Bypass -File "src-tauri\build.ps1"
+
+# CUA smoke test against the built NSIS installer (install -> launch -> nav -> uninstall)
+cua-nsis-test:
+    uv run python scripts/cua-smoke.py --config scripts/cua-nsis-config.json
