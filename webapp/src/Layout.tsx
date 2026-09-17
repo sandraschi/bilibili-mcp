@@ -1,4 +1,5 @@
 import { API_BASE, type Health } from "@/lib/api";
+import { useZoom } from "@/lib/useZoom";
 import {
   Activity,
   ChevronLeft,
@@ -48,6 +49,7 @@ export default function Layout() {
   const [backendOk, setBackendOk] = useState<boolean | null>(null);
   const [tier, setTier] = useState("anonymous");
   const location = useLocation();
+  const { zoomPercent } = useZoom();
 
   const refresh = useCallback(async () => {
     const h = await checkHealth();
@@ -165,6 +167,13 @@ export default function Layout() {
                 <span className="rounded bg-zinc-800 px-2 py-0.5">{backend.tier}</span>
               </>
             )}
+            <span
+              data-testid="zoom-indicator"
+              title="Ctrl+Scroll to zoom, Ctrl+0 to reset"
+              className="rounded bg-zinc-800 px-2 py-0.5 text-zinc-500"
+            >
+              {zoomPercent}%
+            </span>
           </div>
         </header>
         <main className="flex-1 overflow-y-auto p-5">

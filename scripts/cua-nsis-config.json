@@ -1,0 +1,27 @@
+{
+    "product_name": "Bilibili MCP",
+    "install_dir": "%LOCALAPPDATA%\\Bilibili MCP",
+    "operator_exe": "bilibili-mcp-native.exe",
+    "backend_process_names": ["bilibili-mcp-native", "bilibili-mcp-backend"],
+    "backend_port": 11185,
+    "health_path": "/api/health",
+    "diagnostics_path": "/api/capabilities",
+    "feature_smoke_path": "/api/dashboard",
+    "window_title_re": "Bilibili MCP",
+    "nsis_glob": "src-tauri/target/release/bundle/nsis/Bilibili MCP_*_x64-setup.exe",
+    "bridge_ok_text": "Bilibili MCP",
+    "uninstall_registry_filter": "*Bilibili MCP*",
+    "nav_routes": [
+        ["Dashboard", "Dashboard"],
+        ["Explore", "Explore"],
+        ["Search", "Search"],
+        ["Video", "Video"],
+        ["Tools", "Tools"],
+        ["Skills", "Skills"],
+        ["Chat", "Chat"],
+        ["Inbox", "Inbox"],
+        ["Settings", "Settings"],
+        ["Logs", "Logs"],
+        ["Help", "Help"]
+    ]
+}
