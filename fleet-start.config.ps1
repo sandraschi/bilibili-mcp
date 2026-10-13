@@ -9,6 +9,7 @@
     Backend = @{
         Kind          = 'uvicorn'
         UvicornTarget = 'bilibili_mcp.server:app'
+        LogLevel      = 'warning'
         Env           = @{ WEB_PORT = '11185' }
     }
     Frontend = @{
