@@ -400,9 +400,19 @@ function Start-FleetDetachedShell {
         return Start-Process @psi
     }
 
+    # R8: title detached consoles from -Label so taskbar / taskkill can
+    # identify backend vs frontend without remembering ports. Probe runs
+    # use NoNewWindow + redirect, title is irrelevant there (early return).
+    $titledArgs = @($Args)
+    $cmdIdx = [Array]::IndexOf($titledArgs, '-Command')
+    if ($cmdIdx -ge 0 -and ($cmdIdx + 1) -lt $titledArgs.Count) {
+        $safe = ($Label -replace "'", "''")
+        $titledArgs[$cmdIdx + 1] = "`$Host.UI.RawUI.WindowTitle='$safe'; " + $titledArgs[$cmdIdx + 1]
+    }
+
     $normal = @{
         FilePath     = $Exe
-        ArgumentList = $Args
+        ArgumentList = $titledArgs
         PassThru     = $true
         WindowStyle  = $WindowStyle
     }
